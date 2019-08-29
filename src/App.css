@@ -1,33 +1,97 @@
+@import url('https://fonts.googleapis.com/css?family=Bubblegum+Sans|Open+Sans&display=swap');
+
+:root {
+    /* colors */
+    --color-brown: #965f41;
+    --color-lightBrown: #c38e6a;
+    --color-red: #ab5c5c;
+    --color-green: #b8b17b;
+    /*fonts*/
+    --font-general: 'Open Sans', sans-serif;
+    --font-head: 'Bubblegum Sans', cursive;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1, h2 {
+    text-align: center;
+    margin: 0 auto;
+    width: 280px;
+    letter-spacing: 2px;
+    text-transform: capitalize;
+    margin-bottom: 0;
+    font-size: 50px;
+    font-family: 'Bubblegum Sans', cursive;
+    border-bottom: 5px solid var(--color-red);
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+p, span, li, ul, a, input, div {
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+}
+
 .App {
-  text-align: center;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-brown);
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+section {
+    border-radius: 10px;
+    padding: 60px 20px;
+    max-width: 1100px;
+    background: var(--color-lightBrown);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+title {
+    margin:0 auto;
+display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.description {
+    text-align: center;
+    font-weight: 800;
+    margin-top: 0px;
+    margin-bottom: 30px;
+    text-decoration: underline;
+    font-style: italic;
+    letter-spacing: 1px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.displayproducts {
+     padding: 10px;
+    /* margin: 10px; */
+}
+
+.addform {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.addform input {
+    margin-left: 10px;
+    padding: 5px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    width: 140px;
+}
+
+.addform button {
+    width: 80px;
+    outline: none;
+    border: none;
+    margin-left: 5px;
+    padding: 5px;
+    border-radius: 5px;
 }

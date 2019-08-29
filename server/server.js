@@ -8,7 +8,8 @@ const server = express();
 // error handling
 // starta servern
 
-// build-mappen
+server.use(express.static(__dirname + '/../build/'));
+
 server.get('/test', (request, response) => {
 	console.log('Received GET request to /test');
 	response.send('Testing!');

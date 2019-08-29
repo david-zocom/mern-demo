@@ -9,6 +9,7 @@ const server = express();
 // starta servern
 
 server.use(express.static(__dirname + '/../build/'));
+server.use(express.json());
 
 server.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -50,6 +51,22 @@ server.get('/api/coffee', (request, response) => {
 	console.log('Received GET request to /api/coffee', request.url, request.query);
 	response.header('Access-Control-Allow-Origin: *')
 		.send( JSON.stringify(fakeData) );
+})
+
+server.post('/api/coffee', (request, response) => {
+	console.log('Received POST request to /api/coffee', request.url, request.body);
+	let newKey = fakeData.length + 1;
+	fakeData.push({
+		key: newKey,
+		name: request.body.name,
+		size: request.body.size,
+		price: request.body.price,
+		imageUrl: request.body.imageUrl
+	})
+	response.send({
+		newKey,
+		success: true
+	});
 })
 
 const port = process.env.PORT || 1337;

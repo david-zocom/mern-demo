@@ -9,6 +9,7 @@ const App = () => {
 
 	useEffect(() => {
 		// fetch data from API
+		// Better solution: put this in a separate file
 		let url = '/api/coffee';
 		if( process.env.NODE_ENV !== 'production' ) {
 			console.log('Running fetch in DEV MODE, port 1337...');
@@ -37,8 +38,9 @@ const App = () => {
             <p className="description">Vi säljer kaffe - hippt!</p>
             </div>
 
+			<div className="coffeCard_container">
 			<DisplayProducts data={data} />
-
+			</div>
 			<AddForm/>
         </section>
 		</div>

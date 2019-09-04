@@ -7,6 +7,8 @@ const AddForm = () => {
 	const [image, setImage] = useState('');
 
 	const submit = () => {
+		// TODO: flytta ut koden till en egen fil
+		// -> doPostRequest(name, quantity, price, imageUrl);
 		let url = '/api/coffee';
 		if( process.env.NODE_ENV !== 'production' ) {
 			console.log('Running fetch in DEV MODE, port 1337...');

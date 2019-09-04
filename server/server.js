@@ -1,6 +1,6 @@
 const express = require('express');
 const server = express();
-// const MongoClient = require('mongodb').MongoClient;
+const db = require('./db.js');
 
 // Konfigurera webbservern:
 // middleware
@@ -23,50 +23,33 @@ server.get('/test', (request, response) => {
 })
 
 // This will be removed in future version. We will use MongoDB instead
-const fakeData = [
-	{
-		key: 1,
-		name: 'Mocca latte',
-		size: 'large',
-		price: 69,
-		imageUrl: ''
-	},
-	{
-		key: 2,
-		name: 'Espresso tonic',
-		size: 'medium',
-		price: 100,
-		imageUrl: ''
-	},
-	{
-		key: 3,
-		name: 'Regular',
-		size: 'small',
-		price: 20,
-		imageUrl: ''
-	}
-]
+
 // GET /api/coffee
 server.get('/api/coffee', (request, response) => {
 	console.log('Received GET request to /api/coffee', request.url, request.query);
-	response.header('Access-Control-Allow-Origin: *')
-		.send( JSON.stringify(fakeData) );
+	db.getProducts(data => {
+		console.log('Database returned data');
+
+		response.header('Access-Control-Allow-Origin: *')
+		.send( JSON.stringify(data) );
+	})
 })
 
 server.post('/api/coffee', (request, response) => {
-	console.log('Received POST request to /api/coffee', request.url, request.body);
-	let newKey = fakeData.length + 1;
-	fakeData.push({
-		key: newKey,
+	console.log('Received POST request to /api/coffee', request.url);//, request.body);
+	let newObject = {
 		name: request.body.name,
 		size: request.body.size,
 		price: request.body.price,
 		imageUrl: request.body.imageUrl
+	}
+	db.addProduct(newObject, result => {
+		console.log('Added product to collection, it has id: ', result);
+		response.send({
+			newKey: result,
+			success: true
+		});
 	})
-	response.send({
-		newKey,
-		success: true
-	});
 })
 
 const port = process.env.PORT || 1337;
@@ -76,7 +59,31 @@ server.listen(port, () => {
 
 
 
-
+/*
+const fakeData = [
+	{
+		key: 1,
+		name: 'Mocca latte',
+		size: 'large',
+		price: 69,
+		imageUrl: 'https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-Mocca-Latte-with-Coconut.jpg'
+	},
+	{
+		key: 2,
+		name: 'Espresso tonic',
+		size: 'medium',
+		price: 100,
+		imageUrl: 'https://cdn.vox-cdn.com/thumbor/pYuO6XoydLyKNgvq24Dg9bpJFI0=/0x0:2000x1330/1200x0/filters:focal(0x0:2000x1330):no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/3685458/pullingshots.0.jpg'
+	},
+	{
+		key: 3,
+		name: 'Regular',
+		size: 'small',
+		price: 20,
+		imageUrl: 'http://doctorakil.com/wp-content/uploads/2018/01/coffee-940x600.jpg'
+	}
+]
+*/
 
 
 
